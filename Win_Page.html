@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Win Page</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+	<link rel="stylesheet" type="text/css" href="C:\Users\DELL\OneDrive\Documents\Bootstrap\bootstrap-4.4.1-dist\css\bootstrap.min.css">
+	<style>
+		body{
+			background-image: url(Background2.jpg);
+			height: 100vh;
+			background-size: cover;
+			background-position: center;
+			}
+		.btn1{
+			position: absolute;
+			top: 70%;
+			left: 43%;
+			transform: translate(-50%,-50%);
+		}
+		.btn2{
+			position: absolute;
+			top: 70%;
+			left: 60%;
+			transform: translate(-50%,-50%);
+		}
+		#demo{
+			position: absolute;
+			top: 25%;
+			left: 50%;
+			color: #fff;
+			transform: translate(-50%,-50%);
+			font-size: 160px;
+		}
+		h1{
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			font-family: segoe print;
+			font-weight: bold;
+			font-size: 65px;
+			color: #ff9900;
+			transform: translate(-50%,-50%);
+		}
+	</style>
+</head>
+<body>
+	<center>
+	<img src="Crown.jpg" style="width: 100px;padding-top: 10px;"></center>
+	<h1>Won Congrat..!</h1>
+	<div id="demo"></div>
+	<script>
+		var value=localStorage.getItem("textValue");
+		document.getElementById('demo').innerHTML=value;
+		var resetValue="";
+		localStorage.setItem("textValue",resetValue);
+	</script>
+	<a href="C:\Users\DELL\OneDrive\Documents\Bootstrap\Project 7\Try5.html" class="btn btn-success btn-lg btn1">Continue</a>
+	<a href="‪C:\Users\DELL\OneDrive\Documents\Bootstrap\Project 7\Last_Page.html" class="btn btn-success btn-lg btn2">Quit</a>
+	</div>
+
+
+<script src="C:\Users\DELL\OneDrive\Documents\Bootstrap\bootstrap-4.4.1-dist\Jquery.js"></script>
+<script src="C:\Users\DELL\OneDrive\Documents\Bootstrap\bootstrap-4.4.1-dist\js\bootstrap.min.js"></script>
+</body>
+</html>

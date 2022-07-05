@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Try5</title>
+    <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+  <!--<link rel="stylesheet" type="text/css" href="C:\Users\DELL\Documents\Bootstrap\bootstrap-4.4.1-dist\css\bootstrap.min.css">-->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <style>
+body 
+    {
+    background-image: url(Background1.jpg);
+    height: 100vh;
+    background-position: center;
+    background-size: cover;
+    }
+h1
+    {
+    text-align: center
+    }
+table 
+    {
+    margin-left:auto;
+    margin-right:auto;
+    border: 4px solid black;
+    border-collapse: collapse;
+    }
+td
+    {
+    width: 40px; 
+    height: 40px;
+    text-align: center;
+    }
+.up
+    {
+    border-top-style: hidden;
+    border-left-style: hidden;
+    border-right-style: hidden;
+    border-bottom-style: solid;
+    background-color: none;
+    font-weight: bold;
+    }
+.down
+    {
+    border-top-style: solid;
+    border-left-style: hidden;
+    border-right-style: hidden;
+    border-bottom-style: hidden;
+    background-color: none;
+    font-weight: bold;
+    }
+.left
+    {
+    border-top-style: hidden;
+    border-left-style: hidden;
+    border-right-style: solid;
+    border-bottom-style: hidden;
+    background-color: none;
+    font-weight: bold;
+    }
+.right
+    {
+    border-top-style: hidden;
+    border-left-style: solid;
+    border-right-style: hidden;
+    border-bottom-style: hidden;
+    background-color: none;
+    font-weight: bold;
+    }
+.gray
+    {
+    width: 80px;
+    height: 80px;
+    font-size:50px;
+    cursor:pointer;
+    border: 1px solid black;
+    background-color: gray;
+    }
+.white
+    {
+    width: 80px;
+    height: 80px;
+    font-size:50px;
+    cursor:pointer;
+    border: 1px solid black;
+    background-color: white;
+    }
+#chessboard {
+    width: 320px;
+    height: 320px;
+    margin: 20px;
+    border: 2px solid #333;
+    position: relative;
+}
+.black-coin{
+    background: black;
+    width: 20px;
+    height: 20px;
+    cursor:pointer;
+    position: relative;
+    margin: 37% auto;
+    transition: left .5s ease-in, top .5s ease-in;
+}
+
+.white-border{
+    border: 2px solid white;
+}
+
+.white-coin{
+    background: white;
+    width: 20px;
+    height: 20px;
+    position: relative;
+    margin: 37% auto;
+    cursor:pointer;
+    transition: left .5s ease-in, top .5s ease-in;
+}
+
+.black-border{
+    border: 2px solid black;
+}
+
+
+.red-border{border: 2px solid red; box-sizing: border-box;}
+
+.win{background: #F9690E; color: #fff}
+
+.active{
+  background: #ffd699;
+}
+.white:hover{
+    border: 2px solid #ffff00;
+}
+.gray:hover{
+    border: 2px solid #ffff00;
+}
+.play{  
+    width: 28%;
+    text-align: center;
+    font-family: sans-serif;
+    color: #fff;
+    font-size: 25px;
+    background: #446CB3;
+    margin: auto;
+    }
+.btn1{
+    background: #26C281;
+    color: #fff;
+    font-weight: bold;
+    border: 1px solid yellow;
+    cursor: pointer; 
+    width: 200px;
+    height: 40px; 
+    font-size: 22px;
+    display: block;
+    margin: 10px auto;
+}
+</style>
+</head>
+<body>
+<script> // chessboard
+var j=1,X_or_O = 0;
+var wp="&#9817",blp="&#9823";
+document.write("<h1>Game</h1>");
+document.write("<div class='play' id='turn'>Play</div>");
+document.write("<table id=table>");
+// document.write("<tr>");
+// document.write("<span class=play m-5 text-center>Play</span>");
+// document.write("</tr><br>");
+document.write("<tr class=up><td></td>");
+for (var k=1; k<=4; k++){ //letters on top, 97 is a, 104 is h
+    document.write("<td>" + String.fromCharCode(k+96) + "</td>");
+}
+document.write("</tr>");
+
+        document.write("<tr onclick='indexRow(this)'>");
+        document.write("<td class=left>" + j + "</td>");
+        document.write('<td onclick="indexCell(this)" class=white id=box1></td>'); //grab index
+        document.write('<td onclick="indexCell(this)" class=gray id="box2"></td>'); //grab index
+        document.write('<td onclick="indexCell(this)" class=white id="box3"></td>'); //grab index
+        document.write('<td onclick="indexCell(this)" class=gray id="box4"></td>'); //grab index
+        document.write("<td class=right>" + j + "</td>");
+        document.write('</tr>');
+        j++;
+        document.write("<tr onclick='indexRow(this)'>");
+        document.write("<td class=left>" + j + "</td>");
+        document.write('<td onclick="indexCell(this)" class=gray id="box5"></td>'); //grab index
+        document.write('<td onclick="indexCell(this)" class=white id="box6"></td>'); //grab index
+        document.write('<td onclick="indexCell(this)" class=gray id="box7"></td>'); //grab index
+        document.write('<td onclick="indexCell(this)" class=white id="box8"></td>'); //grab index
+        document.write("<td class=right>" + j + "</td>");
+        document.write('</tr>');
+        j++;
+        document.write("<tr onclick='indexRow(this)'>");
+        document.write("<td class=left>" + j + "</td>");
+        document.write('<td onclick="indexCell(this)" class=white id="box9"></td>'); //grab index
+        document.write('<td onclick="indexCell(this)" class=gray id="box10"></td>'); //grab index
+        document.write('<td onclick="indexCell(this)" class=white id="box11"></td>'); //grab index
+        document.write('<td onclick="indexCell(this)" class=gray id="box12"></td>'); //grab index
+        document.write("<td class=right>" + j + "</td>");
+        document.write('</tr>');
+        j++;
+        document.write("<tr onclick='indexRow(this)'>");
+        document.write("<td class=left>" + j + "</td>");
+        document.write('<td onclick="indexCell(this)" class=gray id="box13"></td>'); //grab index
+        document.write('<td onclick="indexCell(this)" class=white id="box14"></td>'); //grab index
+        document.write('<td onclick="indexCell(this)" class=gray id="box15"></td>'); //grab index
+        document.write('<td onclick="indexCell(this)" class=white id="box16"></td>'); //grab index
+        document.write("<td class=right>" + j + "</td>");
+        document.write('</tr>');
+        document.write("<tr class=down><td></td>");
+for (var k=1; k<=4; k++){ //letters on top, 97 is a, 104 is h
+    document.write("<td>" + String.fromCharCode(k+96) + "</td>");
+}
+document.write("</tr>");
+
+    // for (var j=4; j>0; j--){ //numbers dropping on sides
+    // document.write("<td class=right>" + j + "</td>");
+    // }
+
+// document.write("<tr class=down>");
+// for (var k=1; k<=4; k++){ //letters on top,97 is a, 104 is h
+//     document.write("<td>" + String.fromCharCode(k+96) + "</td>");
+// }
+// document.write("</tr>");
+document.write("</table>");
+document.write("<button onclick='replay()' class='btn1'>Play Again</button>");
+
+//pieces
+var pieces=new Array( //pieces
+                new Array(" "," "," "," "," ",),           //0
+                new Array(" ","&#9817"," "," ","&#9823"),  //1
+                new Array(" "," ","&#9817","&#9823"," "),      //2
+                new Array(" "," ","&#9823","&#9817"," "),      //3
+                new Array(" ","&#9823"," "," ","&#9817"),  //4
+            );
+
+//sets up the board
+function setUp(){
+    for (i = 1; i <=4; i++){
+        for (j = 1; j <=4; j++){
+            document.getElementsByTagName('tr')[j].getElementsByTagName('td')[i].innerHTML = pieces[j][i];
+        }
+    }
+}
+setUp();
+
+var boxes = document.querySelectorAll("td");
+//attempts with making things move
+var clickedon = false;
+var save_x = 0;
+var save_y = 0;
+var piece = 0;
+var _x = 0;
+var _y = 0;
+
+//gets cell index
+function indexCell(x)
+{
+alert("Cell index is: " + x.cellIndex);
+_x = x.cellIndex;
+if(clickedon == false)
+{
+if(pieces[_x][_y] != " ")
+{  
+    figura = pieces[_x][_y];
+    save_x = _x;
+    save_y = _y;
+    clickedon = true;
+    alert(piece);    
+}  
+}
+else
+{
+if(pieces[_x][_y] == " ")
+{
+    pieces[save_x][save_y] = " ";
+    pieces[_x][_y] = piece;
+    setUp();
+    clickedon = false
+}       
+}
+}
+
+//grabs row index
+function indexRow(y){
+//alert("Row index is: " + x.rowIndex);
+_y = y.rowIndex;
+}
+var state = false //false if no piece has been selected
+var currentPiece;
+var currentCell;
+
+var cells = document.getElementsByTagName("td"); 
+for (var i = 0; i < cells.length; i++) { 
+   cells[i].onclick = function(){
+       getCell(this);
+   };
+}
+function getCell(that) {
+    // if(this.innerHTML !== "&#9817" && this.innerHTML !== "&#9823")
+    // {
+        if(!state) { //this means if the state is false (i.e. no piece selected
+        state = true; //piece has been selected
+        currentPiece = that.innerHTML; //get the current piece selected
+        currentCell = that; //get the current cell selection
+    }
+
+    else { //else, you are moving a piece
+        if(currentPiece!==" " && currentPiece!==that.innerHTML) {
+        that.innerHTML = currentPiece; //Set the selected space to the piece that was grabbed
+        currentCell.innerHTML = ""; //remove the piece from its old location
+        state = false; //piece has been placed, so set state back to false
+        if(X_or_O%2 === 0)
+        {
+            console.log(X_or_O);
+            turn.innerHTML = "<div style='background-color:gray;display:inline;font-size:25px;'>&#9823</div> Turn Now";
+            X_or_O += 1;
+        }
+        else{
+            console.log(X_or_O);
+            turn.innerHTML = "<div style='background-color:gray;display:inline;'>&#9817</div> Turn Now";
+            X_or_O += 1;
+        }
+}
+    //It is for currenrPiece is not equal to blank or " "
+        else
+        {
+            alert("Move not allowed...!!!fy");
+            // currentPiece=that.innerHTML;
+            // currentCell = that;
+            state=false;
+        }
+}//Else's if Ending
+
+    //Double Click Handler
+    // if(currentPiece&&currentPiece===that.innerHTML)
+    // {
+    //     alert("Moved not allowed...!!!ty");
+    //     //that.innerHTML=currentPiece;
+    //     state=false;
+    // }
+    getWinner();
+}
+//}
+
+function getWinner(){
+                
+                var box1 = document.getElementById("box1"),
+                    box2 = document.getElementById("box2"),
+                    box3 = document.getElementById("box3"),
+                    box4 = document.getElementById("box4"),
+                    box5 = document.getElementById("box5"),
+                    box6 = document.getElementById("box6"),
+                    box7 = document.getElementById("box7"),
+                    box8 = document.getElementById("box8"),
+                    box9 = document.getElementById("box9"),
+                    box10 = document.getElementById("box10"),
+                    box11 = document.getElementById("box11"),
+                    box12 = document.getElementById("box12"),
+                    box13 = document.getElementById("box13"),
+                    box14 = document.getElementById("box14"),
+                    box15 = document.getElementById("box15"),
+                    box16 = document.getElementById("box16");
+            
+                        // get all posibilites
+              if(box1.innerHTML !== "" && box1.innerHTML === box2.innerHTML && box1.innerHTML === box3.innerHTML && box1.innerHTML === box4.innerHTML)
+                 selectWinnerBoxes(box1,box2,box3,box4);
+         
+              if(box5.innerHTML !== "" && box5.innerHTML === box6.innerHTML && box5.innerHTML === box7.innerHTML && box5.innerHTML === box8.innerHTML)
+                 selectWinnerBoxes(box5,box6,box7,box8);
+             
+              if(box9.innerHTML !== "" && box9.innerHTML === box10.innerHTML && box9.innerHTML === box11.innerHTML && box9.innerHTML === box12.innerHTML)
+                selectWinnerBoxes(box9,box10,box11,box12);
+             
+              if(box13.innerHTML !== "" && box13.innerHTML === box14.innerHTML && box13.innerHTML === box15.innerHTML && box13.innerHTML === box16.innerHTML)
+                 selectWinnerBoxes(box13,box14,box15,box16);
+             
+              if(box1.innerHTML !== "" && box1.innerHTML === box5.innerHTML && box1.innerHTML === box9.innerHTML && box1.innerHTML === box13.innerHTML)
+                 selectWinnerBoxes(box1,box5,box9,box13);
+         
+              if(box2.innerHTML !== "" && box2.innerHTML === box6.innerHTML && box2.innerHTML === box10.innerHTML && box2.innerHTML === box14.innerHTML)
+                 selectWinnerBoxes(box2,box6,box10,box14);
+             
+              if(box3.innerHTML !== "" && box3.innerHTML === box7.innerHTML && box3.innerHTML === box11.innerHTML && box3.innerHTML === box15.innerHTML)
+                selectWinnerBoxes(box3,box7,box11,box15);
+             
+              if(box4.innerHTML !== "" && box4.innerHTML === box8.innerHTML && box4.innerHTML === box12.innerHTML && box4.innerHTML === box16.innerHTML)
+                 selectWinnerBoxes(box4,box8,box12,box16);
+             }
+
+
+             function selectWinnerBoxes(b1,b2,b3,b4){
+                b1.classList.add("win");
+                b2.classList.add("win");
+                b3.classList.add("win");
+                b4.classList.add("win");
+                setTimeout(ask(b1),1000);
+            }
+
+            function ask(b1)
+            {
+                var passValue=b1.innerHTML;
+                localStorage.setItem("textValue",passValue);
+                window.location.href="Win_Page.html";
+            }
+
+            function replay(){
+                
+                for(var i = 0; i < boxes.length; i++){
+                    boxes[i].classList.remove("win");
+                    boxes[i].innerHTML = "";
+                    // turn.innerHTML = "Play";
+                    // turn.style.fontSize = "25px";
+                    setUp();
+                    
+                }
+                
+            }
+
+
+            
+
+</script>
+<!--Code for selected cell of Gameboard get Hilighted-->
+
+<script>
+$(function(){
+$("table tr td").on("click",function(){
+    $("td").removeClass("active");
+  $(this).addClass("active");
+})
+
+})
+
+</script>
+<script src="C:\Users\DELL\Documents\Bootstrap\bootstrap-4.4.1-dist\Jquery.js"></script>
+<script src="C:\Users\DELL\Documents\Bootstrap\bootstrap-4.4.1-dist\js\bootstrap.js"></script>
+</body>
+</html>
