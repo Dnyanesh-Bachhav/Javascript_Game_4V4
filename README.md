@@ -1,7 +1,9 @@
 # Javascript_Game_4V4♟♟
 
 ![GAME_IMAGE](./images/Game_4v4.png)
-Deployment in progress...
+
+Visit👉👉 https://dnyanesh-bachhav.github.io/Javascript_Game_4V4/
+
 It is a simple game in HTML,CSS,Javascript...
 
 It is inspired by Tic-tac-toe but it is 4X4...
